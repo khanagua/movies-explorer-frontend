@@ -1,6 +1,6 @@
 .project {
   color: #000;
-  max-width: 1280px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 110px 70px;
 }
@@ -14,7 +14,7 @@
   list-style-type: none;
   margin: 0 0 110px 0;
   padding: 0;
-  gap: 40px;
+  gap: 53px; /* добавлено */
   justify-content: space-between;
 }
 
@@ -68,6 +68,7 @@
 
   .project__list {
     margin: 0 0 93px 0;
+    gap: 37px; /* добавлено */
   }
 
   .project__subtitle {
@@ -77,6 +78,14 @@
   .project__text {
     font-size: 12px;
     line-height: 18px;
+  }
+
+  .project__cell_dark {
+    width: 21%;
+  }
+
+  .project__cell_header {
+    padding-top: 10px;
   }
 }
 
@@ -112,14 +121,14 @@
   }
 
   .project__cell {
-    padding: 11px;
+    padding: 9px;
   }
 
   .project__cell_dark {
     width: 36%;
   }
 
-  .project__cell_header {
+  /* .project__cell_header {
     padding-top: 10px;
-  }
+  } */
 }

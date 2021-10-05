@@ -3,14 +3,13 @@
   background-image: url(../../images/img_landing-logo.png);
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 524px;
+  min-height: 484px; /* добавлено */
   display: flex;
   align-items: center;
+  padding-bottom: 40px; /* добавлено */
 }
 
 .promo__title {
-  margin: 0;
-  padding: 0;
   font-weight: normal;
   font-size: 50px;
   line-height: 58px;
@@ -21,10 +20,18 @@
   padding: 0 20px;
 }
 
+@media (max-width: 768px) {
+  .promo {
+    min-height: 768px; /* добавлено */
+    padding-bottom: 16px; /* добавлено */
+  }
+}
+
 @media (max-width: 540px) {
   .promo {
-    min-height: 570px;
+    min-height: 531px;
     background-size: 248px;
+    padding-bottom: 38px;
   }
   .promo__title {
     font-size: 31px;
