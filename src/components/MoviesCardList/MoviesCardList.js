@@ -1,20 +1,20 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
-import { moviesData } from '../../utils/data.js';
 
 
-function MoviesCardList() {
+function MoviesCardList(props) {
+  const moviesList = props.moviesList;
+  const isSaved = props.isSaved;
   return (
     <div className="movies-cards">
       <div className="movies-list">
-        <MoviesCard movie = {moviesData[0]} />
-        <MoviesCard movie = {moviesData[1]} />
-        <MoviesCard movie = {moviesData[2]} />
-        <MoviesCard movie = {moviesData[3]} />
-        <MoviesCard movie = {moviesData[4]} />
-        <MoviesCard movie = {moviesData[5]} />
-        <MoviesCard movie = {moviesData[6]} />
+        {moviesList.map(element => (
+          <MoviesCard
+            movie = {element}
+            key = {element.key}
+            isSaved = {isSaved} />
+        ))}
       </div>
       <button className="movies-cards__button" type="button">Ещё</button>
     </div>

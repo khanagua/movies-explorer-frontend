@@ -9,7 +9,12 @@ function MoviesCard(props) {
           <p className="movies-card__name">{props.movie.name}</p>
           <p className="movies-card__duration">{props.movie.duration}</p>
         </div>
-        <button className={`movies-card__save ${props.movie.save ? 'movies-card__save_active' : '' }`} type="button"></button>
+        <button
+          type="button"
+          className={`movies-card__icon
+          ${props.isSaved ? "movies-card__icon_type_delete" : "" }
+          ${props.movie.save ? "movies-card__icon_type_active" : "movies-card__icon_type_save" }`}
+        ></button>
       </div>
       <img src={props.movie.screen} className="movies-card__screen" alt={`Кадр из фильма ${props.movie.name}`} />
     </div>

@@ -134,3 +134,23 @@
     min-height: 26px;
   }
 }
+
+.header_mini {
+  padding-top: 70px;
+}
+
+@media (max-width: 768px) {
+  .header_mini {
+    padding-top: 232px;
+  }
+}
+
+@media (max-width: 540px) {
+  .header_mini {
+    padding: 56px 0 28px 0;
+  }
+
+  .header__wrapper_login {
+    justify-content: center;
+  }
+}

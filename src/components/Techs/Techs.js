@@ -4,7 +4,7 @@ import Title from '../Title/Title.js';
 
 function Techs() {
   return (
-    <div className="techs">
+    <div className="techs" id="techs">
       <div className="techs__wrapper">
         <Title text="Технологии" className="techs__title" />
         <h3 className="techs__subtitle">7&#160;технологий</h3>

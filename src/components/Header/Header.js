@@ -1,7 +1,7 @@
 import { Route, Link } from 'react-router-dom';
 import './Header.css';
 // import iconAccount from '../../images/icon_account.png';
-import Menu from '../Menu/Menu.js';
+import Navigation from '../Navigation/Navigation.js';
 import AccountButton from '../AccountButton/AccountButton.js';
 
 function Header() {
@@ -10,11 +10,10 @@ function Header() {
     <Route exact path="/">
       <header className="header">
         <div className="header__wrapper">
-          <a href="##" className="header__logo" target="_self">
-          </a>
+          <Link to="/" className="header__logo" target="_self"></Link>
           <div className="header__nav header__nav_main">
-            <Link to="/sign-in" className="header__link">Регистрация</Link>
-            <Link to="/sign-up" className="header__link header__link_type_signin">Войти</Link>
+            <a href="/signin" className="header__link">Регистрация</a>
+            <a href="/signup" className="header__link header__link_type_signin">Войти</a>
           </div>
         </div>
       </header>
@@ -22,30 +21,28 @@ function Header() {
     <Route exact path={["/movies", "/saved-movies", "/profile"]}>
       <header className="header header_login">
         <div className="header__wrapper">
-          <a href="##" className="header__logo" target="_self">
-          </a>
+          <Link to="/" className="header__logo" target="_self"></Link>
           <div className="header__nav">
-            <Link to="#" className="header__link header__link_bigger">Фильмы</Link>
-            <Link to="#" className="header__link header__link_bigger" >Сохраненные фильмы</Link>
+            <a href="/movies" className="header__link header__link_bigger">Фильмы</a>
+            <a href="/saved-movies" className="header__link header__link_bigger" >Сохраненные фильмы</a>
             <AccountButton />
           </div>
           <Route exact path="/movies">
-            <Menu href="movies"/>
+            <Navigation href="movies"/>
           </Route>
           <Route exact path="/saved-movies">
-            <Menu href="saved-movies" />
+            <Navigation href="saved-movies" />
           </Route>
           <Route exact path="/profile">
-            <Menu href="profile" />
+            <Navigation href="profile" />
           </Route>
         </div>
       </header>
     </Route>
-    <Route exact path={["/sign-in", "/sign-up"]}>
-      <header className="header header_login">
+    <Route exact path={["/signin", "/signup"]}>
+      <header className="header header_login header_mini">
         <div className="header__wrapper header__wrapper_login">
-          <a href="##" className="header__logo" target="_self">
-          </a>
+          <Link to="/" className="header__logo" target="_self"></Link>
         </div>
       </header>
     </Route>

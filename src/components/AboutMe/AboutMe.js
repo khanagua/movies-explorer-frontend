@@ -1,22 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './AboutMe.css';
 import Title from '../Title/Title.js';
 import studentPhoto from '../../images/student__photo.jpg';
 
 function AboutMe() {
   return (
-    <div className="about-me">
+    <div className="about-me" id="about-me">
       <Title text="Студент" className="about-me__title" />
       <div className="about-me__card">
         <div className="about-me__info">
-          <p className="about-me__name">Виталий</p>
-          <p className="about-me__prof">Фронтенд-разработчик, 30&#160;лет</p>
-          <p className="about-me__about">Я родился и&#160;живу в&#160;Саратове, закончил факультет экономики СГУ. У&#160;меня есть жена 
-и&#160;дочь. Я люблю слушать музыку, а&#160;ещё увлекаюсь бегом. Недавно начал кодить. С&#160;2015 года работал в&#160;компании «СКБ&#160;Контур». После того, как прошёл курс по&#160;веб-разработке, начал заниматься фриланс-заказами и&#160;ушёл с&#160;постоянной работы.</p>
+          <p className="about-me__name">Виктория</p>
+          <p className="about-me__prof">Фронтенд-разработчик, 32&#160;года</p>
+          <p className="about-me__about">Я родилась и&#160;живу в&#160;Санкт-Петербурге, закончила факультет прикладной информатики в ИНЖЭКОНе. Сейчас нахожусь в&#160;декретном отпуске. С&#160;2016 года работала в компании ЮMoney (ex. Яндекс.Деньги). Любимое занятие&#160;&#8211; улучить время для чая найдине с&#160;собой (или с&#160;книжкой).</p>
           <ul className="about-me__social-links">
-            <li><Link to="#" className="about-me__social-link">Facebook</Link></li>
-            <li><Link to="#" className="about-me__social-link">Github</Link></li>
+            <li><a href="https://www.facebook.com/profile.php?id=100006367518821" className="about-me__social-link" target="_blank" rel="noreferrer">Facebook</a></li>
+            <li><a href="https://github.com/khanagua" className="about-me__social-link" target="_blank" rel="noreferrer">Github</a></li>
           </ul>
         </div>
         <img className="about-me__photo" src={studentPhoto} alt="Фотография студента"></img>

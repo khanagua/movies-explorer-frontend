@@ -4,7 +4,7 @@ import Title from '../Title/Title.js';
 
 function AboutProject() {
   return (
-    <div className="project">
+    <div className="project" id="project">
       <Title text="О проекте" className="project__title" />
       <ul className="project__list">
         <li className="project__item">
