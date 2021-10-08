@@ -1,0 +1,40 @@
+.login__footer {
+  max-width: 396px;
+  margin: 0 auto;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #A0A0A0;
+  padding: 0 10px 70px 10px;
+}
+
+.login__link {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000000;
+  text-decoration: none;
+}
+
+.login__link:hover {
+  color: #F3C1F8;
+}
+
+.login__link:active {
+  box-shadow: 0 0 0 1px red;
+}
+
+@media (max-width: 540px) {
+  .login__footer {
+    font-size: 12px;
+    line-height: 15px;
+    padding-bottom: 28px;
+  }
+
+  .login__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
