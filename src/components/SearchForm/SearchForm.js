@@ -7,7 +7,12 @@ function SearchForm() {
     <div className="search">
       <form className="search__form" name="SearchForm">
         <div className="search__fieldset">
-          <input className="search__input" type="search" name="" placeholder="Фильмы" />
+          <input
+            className="search__input"
+            type="search"
+            name="search__input"
+            placeholder="Фильмы"
+            required/>
           <button className="search__button" type="submit" aria-label="">Поиск</button>
         </div>
         <div className="search__wrap">
