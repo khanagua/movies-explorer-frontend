@@ -1,22 +1,49 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
 import './Profile.css';
+import useFormValidation from "../../utils/useFormValidation";
 
-function Profile() {
+import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
+
+function Profile(props) {
+
+  const currentUser = React.useContext(CurrentUserContext);
+
+  const { values: userData, errors, handleChange, isValid, resetForm } = useFormValidation(
+    {
+      name: "",
+      email: "",
+      password: "",
+    }
+  );
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onUpdateUser(userData);
+    resetForm();
+  }
+
   return (
     <div className="profile">
-      <h1 className="profile__title">Привет, Виктория!</h1>
-      <form className="profile__form" name="profile">
+      <h1 className="profile__title">Привет, {currentUser.name}!</h1>
+      <form
+        className="profile__form"
+        name="profile"
+        onSubmit={handleSubmit}
+        isValid={isValid}
+      >
         <div className="profile__wrap">
           <label htmlFor="name" className="profile__label">Имя</label>
           <input
             type="text"
             name="name"
             id="name"
-            className="profile__input profile__input_type_name"
+            className="profile__input"
             minLength="2"
             maxLength="50"
-            placeholder="Виктория"
+            placeholder={currentUser.name}
             required
+            value={userData.name || ""}
+            onChange = {handleChange}
           />
         </div>
         <div className="profile__wrap">
@@ -25,14 +52,18 @@ function Profile() {
             type="email"
             name="email"
             id="email"
-            className="profile__input profile__input_type_email"
-            placeholder="vika@ya.ru"
+            className="profile__input"
+            placeholder={currentUser.email}
             required
+            value={userData.email || ""}
+            onChange = {handleChange}
           />
         </div>
+        <div className="profile__error">{errors.name || ' '}</div>
+        <div className="profile__error">{errors.email || ' '}</div>
         <button className="profile__button" type="submit" aria-label="Редактировать">Редактировать</button>
       </form>
-      <Link to="/" className="profile__link">Выйти из аккаунта</Link>
+      <button onClick={props.onLogOut} className="profile__exit">Выйти из аккаунта</button>
     </div>
   );
 }
