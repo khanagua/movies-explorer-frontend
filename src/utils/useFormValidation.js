@@ -19,7 +19,7 @@ function useFormValidation(inputs) {
     setValues({ ...values, [name]: checked });
     setErrors({ ...errors, [name]: e.target.validationMessage });
     setIsValid(e.target.closest("form").checkValidity());
-  }
+  };
 
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -30,7 +30,7 @@ function useFormValidation(inputs) {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, errors, isValid, handleChange, handleChecked, resetForm };
+  return { values, errors, isValid, setIsValid, handleChange, handleChecked, resetForm };
 }
 
 export default useFormValidation;

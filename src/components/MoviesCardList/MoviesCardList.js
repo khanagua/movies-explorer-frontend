@@ -6,8 +6,6 @@ function MoviesCardList(props) {
 
   // const [isMoreButtonVisibility, setIsMoreButtonVisibility] = useState(true);
 
-
-
   const [renderedMovies, setRenderedMovies] = useState(0);
   const [moviesRenderMore, setMoviesRenderMore] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -52,8 +50,8 @@ function MoviesCardList(props) {
     setRenderedMovies(renderedMovies + moviesRenderMore);
   };
 
-  console.log(props.resultMoviesList);
-  console.log(renderedMovies);
+  // console.log(props.resultMoviesList);
+  // console.log(renderedMovies);
 
   return (
     <div className="movies-cards">

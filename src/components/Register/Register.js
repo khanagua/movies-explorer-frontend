@@ -5,22 +5,6 @@ import useFormValidation from "../../utils/useFormValidation";
 
 function Register(props) {
 
-  // const [userData, setUserData] = React.useState (
-  //   {
-  //     name: "Вика",
-  //     email: "vika1@ya.ru",
-  //     password: "1",
-  //   }
-  // )
-
-  // function handleChange(e) {
-  //   const { name, value } = e.target;
-  //   setUserData({
-  //     ...userData,
-  //     [name]: value
-  //   })
-  // }
-
   const { values: userData, errors, handleChange, isValid, resetForm } = useFormValidation(
     {
       name: "",
@@ -35,12 +19,6 @@ function Register(props) {
     props.onRegister(name, email, password);
     resetForm();
   }
-
-  // React.useEffect(() => {
-  //   setRequestStatusMessage({
-  //     isVisible: false,
-  //   });
-  // }, [userData]);
 
   return (
     <div className="register">

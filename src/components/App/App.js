@@ -139,7 +139,7 @@ function App() {
     setIsLoggedIn(false);
     localStorage.clear();
     setCurrentUser({});
-    MainApi.signout();
+    MainApi.signout()
   };
 
 //// ПОПАП ////////////////////////////////////////////////////////

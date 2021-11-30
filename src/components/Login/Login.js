@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext } from 'react';
 import Form from '../Form/Form';
 import './Login.css';
 import useFormValidation from "../../utils/useFormValidation";
@@ -8,7 +8,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
 
 function Login(props) {
 
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   const { values: userData, errors, handleChange, isValid, resetForm } = useFormValidation(
     {
