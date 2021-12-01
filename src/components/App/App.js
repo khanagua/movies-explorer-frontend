@@ -48,7 +48,6 @@ function App() {
 
   // Запрос инфо пользователя и сохраненок при загрузке страницы
   useEffect(() => {
-    console.log("я что-то знаю")
     Promise.all([MainApi.getUserData(), MainApi.getSavingMoviesData()])
     .then(([userData, moviesData]) => {
       // данные про пользователя
