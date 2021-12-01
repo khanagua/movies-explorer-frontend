@@ -38,7 +38,17 @@ function App() {
   const [errFormMessage, setErrFormMessage] = useState("");
   const [errFindMessage, setErrFindMessage] = useState("");
 
-  // const [];
+
+  useEffect(() => {
+    handleTokenCheck();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function handleTokenCheck () {
+    if(localStorage.getItem('isLogin')) {
+      setIsLoggedIn(true);
+    }
+  };
 
   useEffect(() => {
     location.pathname === "/movies" ? setIsSavedMoviesList(false) : setIsSavedMoviesList(true);
@@ -52,7 +62,6 @@ function App() {
     .then(([userData, moviesData]) => {
       // данные про пользователя
       setCurrentUser(userData);
-      setIsLoggedIn(true);
       if (location.pathname === ('/signin' || '/signup')) {
         history.push('/movies');
       } else {
@@ -67,11 +76,11 @@ function App() {
       setIsLoggedIn(false);
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoggedIn]);
 
 //// ПОЛЬЗОВАТЕЛЬ /////////////////////////////////////////////////
 
-  function  handleRegister (name, email, password) {
+  function handleRegister (name, email, password) {
     MainApi.register(name, email, password)
     .then((userData) => {
       setIsPopupOpen(false);
@@ -81,7 +90,7 @@ function App() {
         name: userData.name,
         email: userData.email
       });
-      history.push('/movies');
+      handleLogin(email, password);
     })
     .catch(err => {
       if(err === 400) {
@@ -98,6 +107,7 @@ function App() {
     .then((res) => {
       if(res === 200) {
         setIsLoggedIn(true);
+        localStorage.setItem('isLogin', true);
         setIsPopupOpen(false);
         history.push('/movies');
       } else {
