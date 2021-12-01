@@ -48,12 +48,13 @@ function App() {
 
   // Запрос инфо пользователя и сохраненок при загрузке страницы
   useEffect(() => {
+    console.log("я что-то знаю")
     Promise.all([MainApi.getUserData(), MainApi.getSavingMoviesData()])
     .then(([userData, moviesData]) => {
       // данные про пользователя
       setCurrentUser(userData);
       setIsLoggedIn(true);
-      if (location.pathname === ('/signin' || 'signup')) {
+      if (location.pathname === ('/signin' || '/signup')) {
         history.push('/movies');
       } else {
         history.push(location.pathname);
@@ -65,7 +66,6 @@ function App() {
     })
     .catch((err) => {
       setIsLoggedIn(false);
-      history.push('/signin');
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
