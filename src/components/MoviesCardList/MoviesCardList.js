@@ -26,7 +26,7 @@ function MoviesCardList(props) {
   });
 
   useEffect(() => {
-    if (props.location.pathname === '/movies') {
+    if (props.location.pathname === "/movies") {
       if (windowWidth <= 768) {
         setRenderedMovies(5);
         setMoviesRenderMore(5);
@@ -50,9 +50,6 @@ function MoviesCardList(props) {
     setRenderedMovies(renderedMovies + moviesRenderMore);
   };
 
-  // console.log(props.resultMoviesList);
-  // console.log(renderedMovies);
-
   return (
     <div className="movies-cards">
       <div className="movies-list">
@@ -62,7 +59,7 @@ function MoviesCardList(props) {
               moviesToRender.push(
                 <MoviesCard
                   movie={movie}
-                  key={props.location.pathname === '/movies' ? movie.id : movie.movieId}
+                  key={props.location.pathname === "/movies" ? movie.id : movie.movieId}
                   location={props.location.pathname}
                   savedMovies={props.savedMovies}
                   setSavedMovies={props.setSavedMovies}
@@ -74,7 +71,7 @@ function MoviesCardList(props) {
               moviesToRender.push(
                 <MoviesCard
                   movie={movie}
-                  key={props.location.pathname === '/movies' ? movie.id : movie.movieId}
+                  key={props.location.pathname === "/movies" ? movie.id : movie.movieId}
                   location={props.location.pathname}
                   savedMovies={props.savedMovies}
                   setSavedMovies={props.setSavedMovies}
@@ -89,26 +86,6 @@ function MoviesCardList(props) {
       {props.resultMoviesList.length > renderedMovies && <button className="movies-cards__button" onClick={handleMore}>Ещё</button>}
     </div>
   );
-
-
- // return (
-  //   <div className="movies-cards">
-  //     {isMoreButtonVisibility && <button className="movies-cards__button" onClick={handleMore}>Ещё</button> }
-  //     <div className="movies-list">
-  //       {newArray.map((movie) => {
-  //         return <MoviesCard
-  //           movie={movie}
-  //           key={props.location.pathname === '/movies' ? movie.id : movie.movieId}
-  //           location={props.location.pathname}
-  //           savedMovies={props.savedMovies}
-  //           setSavedMovies={props.setSavedMovies}
-  //           isSavedMoviesList={props.isSavedMoviesList}
-  //           />
-  //       })}
-  //     </div>
-  //     {/* <button className="movies-cards__button">Ещё</button> */}
-  //   </div>    
-  // );
 
 };
 

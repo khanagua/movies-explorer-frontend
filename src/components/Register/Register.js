@@ -43,7 +43,7 @@ function Register(props) {
           value={userData.name || ""}
           onChange = {handleChange}
         />
-        <span className="form__error">{errors.name || ' '}</span>
+        <span className="form__error">{errors.name || ''}</span>
         <label htmlFor="email" className="form__label">E-mail</label>
         <input
           type="email"
@@ -54,7 +54,7 @@ function Register(props) {
           value={userData.email || ""}
           onChange = {handleChange}
         />
-        <span className="form__error">{errors.email || ' '}</span>
+        <span className="form__error">{errors.email || ''}</span>
         <label htmlFor="password" className="form__label">Пароль</label>
         <input
           type="password"
@@ -62,10 +62,10 @@ function Register(props) {
           id="password"
           className="form__input"
           required
-          value={userData.password || ""}
+          value={userData.password || ''}
           onChange = {handleChange}
         />
-        <span className="form__error">{errors.password || ' '}</span>
+        <span className="form__error">{errors.password || ''}</span>
       </Form>
       <p className="register__footer">Уже зарегистрированы? <Link to="/signin" className="register__link">Войти</Link></p>
     </div>

@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import './Profile.css';
 import useFormValidation from "../../utils/useFormValidation";
-
 import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
 
 function Profile(props) {
-
   const currentUser = React.useContext(CurrentUserContext);
-
   const { values: userData, errors, handleChange, isValid, setIsValid, resetForm } = useFormValidation(
     {
       name: "",
@@ -18,10 +15,8 @@ function Profile(props) {
   useEffect(() => {
     if((userData.name === currentUser.name) && (userData.email === currentUser.email)) {
       setIsValid(false);
-    } else {
-      setIsValid(true);
     }
-  }, [userData, currentUser, setIsValid])
+  }, [userData, currentUser, setIsValid, isValid])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -66,9 +61,9 @@ function Profile(props) {
             onChange = {handleChange}
           />
         </div>
-        <div className="profile__error">{errors.name || ' '}</div>
-        <div className="profile__error">{errors.email || ' '}</div>
-        <button className="profile__button" type="submit" disabled={isValid} aria-label="Редактировать">Редактировать</button>
+        <div className="profile__error">{errors.name || ''}</div>
+        <div className="profile__error">{errors.email || ''}</div>
+        <button className="profile__button" type="submit" disabled={!isValid} aria-label="Редактировать">Редактировать</button>
       </form>
       <button onClick={props.onLogOut} className="profile__exit">Выйти из аккаунта</button>
     </div>

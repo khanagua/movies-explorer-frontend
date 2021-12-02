@@ -17,6 +17,7 @@ import SavedMovies from '../SavedMovies/SavedMovies.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js';
 
 import * as MainApi from '../../utils/MainApi.js';
+import { MESSAGE } from '../../utils/constants.js';
 
 function App() {
 
@@ -38,7 +39,6 @@ function App() {
   const [errFormMessage, setErrFormMessage] = useState("");
   const [errFindMessage, setErrFindMessage] = useState("");
 
-
   useEffect(() => {
     handleTokenCheck();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,8 +46,8 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      if (location.pathname === ('/signin' || '/signup')) {
-        history.push('/movies');
+      if (location.pathname === ("/signin" || "/signup")) {
+        history.push("/movies");
       }
     }
   }, [location.pathname, isLoggedIn, history])
@@ -97,7 +97,7 @@ function App() {
     })
     .catch(err => {
       if(err === 400) {
-        setErrMessage(`Некорректно заполнено одно из полей. Или пользователь уже существует`)
+        setErrMessage(MESSAGE.incorrectInput)
       } else {
         setErrMessage(err.message)
       }
@@ -112,9 +112,9 @@ function App() {
         setIsLoggedIn(true);
         localStorage.setItem("isLogin", true);
         setIsPopupOpen(false);
-        history.push('/movies');
+        history.push("/movies");
       } else {
-        setErrMessage('Что-то пошло не так')
+        setErrMessage(MESSAGE.unknownError)
         setIsPopupOpen(true)
       }
       setErrMessage("");
@@ -122,13 +122,13 @@ function App() {
     .catch(err => {
       switch(err) {
         case 400:
-          setErrMessage(`Пользователь с email не найден. Ошибка ${err}`);
+          setErrMessage(`${MESSAGE.incorrectEmail} ${err}`);
           break
         case 401:
-          setErrMessage(`Ошибка в почте или пароле. Ошибка ${err}`);
+          setErrMessage(`${MESSAGE.incorrectData} ${err}`);
           break
         default:
-          setErrMessage(`Ошибка ${err}`);
+          setErrMessage(`${MESSAGE.error} ${err}`);
           break
       }
       setIsPopupOpen(true);
@@ -143,7 +143,7 @@ function App() {
     })
     .catch(err => {
       setIsPopupOpen(true);
-      setErrMessage(`Не удалось обновить данные ${err}`)
+      setErrMessage(`${MESSAGE.failedUpdateData} ${err}`)
     })
   };
 
@@ -158,7 +158,7 @@ function App() {
 
   // Закрывает попап по esc
   function onCloseEsc(evt) {
-    if (evt.key === 'Escape') {
+    if (evt.key === "Escape") {
       closePopup();
     }
   };

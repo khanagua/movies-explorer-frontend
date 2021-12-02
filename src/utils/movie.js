@@ -1,41 +1,38 @@
-import * as MoviesApi from './MoviesApi.js';
 import * as MainApi from './MainApi.js';
+import { MESSAGE } from '../utils/constants.js';
 
-export const getMoviesList = () => {
-
-  let moviesList = [];
-
-  // ищет раннее загруженный список в localStorage
-  if (localStorage.getItem('moviesList')) {
-    moviesList = JSON.parse(localStorage.getItem('moviesList'));
-  } else (
-    // подтягивает список фильмов из api
-    MoviesApi.getMovies()
-    .then((moviesData) => {
-      moviesList = moviesData;
-      localStorage.setItem('moviesList', JSON.stringify(moviesData));
-    })
-    .catch((err) => {
-      moviesList = [];
-      // setErrFindMessage("Ничего не найдено");
-    })
-  )
-  return moviesList;
-};
-
+// возвращает фильмы, которые содержат ключевое слово в названии
 export const filterByKeyword = (moviesList, keyWord) => {
   let results = moviesList.filter(movie => movie.nameRU.toLowerCase().includes(keyWord.trim().toLowerCase()));
-  // console.log(results);
   return results;
 };
 
+// возвращает короткие фильмы
 export const filterByDuration = (movies) => {
-  // console.log('пришел забрать')
-  // console.log(movies);
   let results = movies.filter((movie) => movie.duration <= 40);
   return results;
 };
 
+// выстраивает порядок сортировки фильмов
+export const sortMovies = (intermediateResult, keywords, isShort, setList, setErrFindMessage) => {
+  // фильтруем по названию
+  let intermediateResultByKeyword = filterByKeyword(intermediateResult, keywords);
+  // фильтруем по длительности
+  if (isShort) {
+    intermediateResultByKeyword = filterByDuration(intermediateResultByKeyword);
+    setList(intermediateResultByKeyword);
+  } else {
+    setList(intermediateResultByKeyword);
+  }
+  // проверяем, есть ли фильмы, подходящие под запрос
+  if(intermediateResultByKeyword.length === 0) {
+    setErrFindMessage(MESSAGE.notFound);
+  } else {
+    setErrFindMessage("");
+  }
+};
+
+// добавляет фильм в избранное
 export const addMovie = (movie, savedMovies, setSavedMovies) => {
   MainApi.addMovieCard(
     {
@@ -63,6 +60,7 @@ export const addMovie = (movie, savedMovies, setSavedMovies) => {
   .catch(err => console.log(err))
 };
 
+// удаляет фильм из избранного
 export const deleteMovie = (deleteMovieId, setSavedMovies) => {
   MainApi.deleteMovieCard(deleteMovieId)
   .then(res => {

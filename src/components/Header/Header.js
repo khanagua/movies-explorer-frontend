@@ -1,6 +1,5 @@
 import { Route, Link } from 'react-router-dom';
 import './Header.css';
-// import iconAccount from '../../images/icon_account.png';
 import Navigation from '../Navigation/Navigation.js';
 import AccountButton from '../AccountButton/AccountButton.js';
 import { useEffect } from 'react';
@@ -20,7 +19,7 @@ function Header(props) {
         </header>
       </Route>
     
-      <Route path="/">
+      <Route exact path={["/", "/movies", "/saved-movies", "/profile"]}>
         {props.loggedIn ? 
           <header className={`header ${props.isThemeWhite ? "header_login" : ""}`}>
             <div className="header__wrapper">

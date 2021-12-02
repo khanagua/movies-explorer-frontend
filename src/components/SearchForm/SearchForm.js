@@ -1,54 +1,51 @@
 import './SearchForm.css';
 import useFormValidation from '../../utils/useFormValidation.js';
-import { getMoviesList, filterByKeyword, filterByDuration } from '../../utils/movie.js';
+import * as MoviesApi from '../../utils/MoviesApi.js';
+import { sortMovies } from '../../utils/movie.js';
+import { MESSAGE } from '../../utils/constants.js';
 
 function SearchForm(props) {
-
+    
   const { values, isValid, handleChange, handleChecked } = useFormValidation({
     movie: "",
     short: false,
   });
 
+  let intermediateResult = [];
+
   const handleSubmit = (evt) => {
     props.setIsResponseWaiting(true)
     evt.preventDefault();
     
-    let intermediateResult = [];
-    let result = []
-
     if (isValid) {
       props.setErrFormMessage("");
-
-      // записываем в переменную массив, по которому будем искать
-      !props.isSavedMoviesList ? intermediateResult = getMoviesList() : intermediateResult = props.savedMovies;
-
-      // фильтруем по названию
-      let intermediateResultByKeyword = filterByKeyword(intermediateResult, values.movie);
-
-      if (values.short) {
-        // фильтруем по длительности
-        result = filterByDuration(intermediateResultByKeyword);
-      } else {
-        result = intermediateResultByKeyword;
-      }
-
-      // если ничего не нашли, то возращаем к исходному массиву
-      if (result.length === 0) {
-        props.setErrFindMessage("Ничего не найдено");
-        !props.isSavedMoviesList ? props.setMoviesList(getMoviesList()) : props.setSavedMovies(JSON.parse(localStorage.getItem("savedMovieList")));
-        !props.isSavedMoviesList ? props.setIsMoviesListVisibility(false) : props.setIsSavedMoviesListVisibility(false)
-      } else {
-        // а если нашли, то возращаем новый массив с результатом
-        props.setErrFindMessage("");
-        !props.isSavedMoviesList ? props.setMoviesList(result) : props.setSavedMovies(result);
-        !props.isSavedMoviesList ? props.setIsMoviesListVisibility(true) : props.setIsSavedMoviesListVisibility(true)
-      }
-
+        // смотрим, по какому списку ищем
+        if(!props.isSavedMoviesList) {
+        // ищем по всем фильмам
+          // ищет раннее загруженный список в localStorage
+          if (localStorage.getItem("moviesList")) {
+            intermediateResult = JSON.parse(localStorage.getItem("moviesList"));
+            sortMovies(intermediateResult, values.movie, values.short, props.setMoviesList, props.setErrFindMessage);
+          } else {
+            // подтягивает список фильмов из api
+            MoviesApi.getMovies()
+            .then((moviesData) => {
+              intermediateResult = moviesData;
+              localStorage.setItem("moviesList", JSON.stringify(moviesData));
+              sortMovies(intermediateResult, values.movie, values.short, props.setMoviesList, props.setErrFindMessage);
+            })
+            .catch((err) => {
+              props.setErrFindMessage(MESSAGE.requestError);
+            })
+          }
+        } else {
+        // ищем по сохраненкам
+          intermediateResult = JSON.parse(localStorage.getItem("savedMovieList"));;
+          sortMovies(intermediateResult, values.movie, values.short, props.setSavedMovies, props.setErrFindMessage);
+        }
     } else {
-      props.setErrFormMessage("Нужно ввести ключевое слово");
-      !props.isSavedMoviesList ? props.setMoviesList(getMoviesList()) : props.setSavedMovies(JSON.parse(localStorage.getItem("savedMovieList")));
+      props.setErrFormMessage(MESSAGE.keyword);
     }
-
     props.setIsResponseWaiting(false)
   };
 
