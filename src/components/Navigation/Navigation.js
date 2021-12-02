@@ -10,7 +10,7 @@ function Navigation(props) {
       <div className="navigation__shade"></div>
       <ul className="navigation__list" id="navigation__list_visible">
         <li className="navigation__item">
-          <Link to="/" className="navigation__link">Главная</Link>
+          <Link to="/" className={`navigation__link ${props.href === "/" ? "navigation__link_active" : ""}`}>Главная</Link>
         </li>
         <li className="navigation__item">
           <Link to="/movies" className={`navigation__link ${props.href === "movies" ? "navigation__link_active" : ""}`}>Фильмы</Link>

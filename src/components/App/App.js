@@ -190,7 +190,7 @@ function App() {
       <div className="page">
         <Switch>
           <Route exact path="/">
-            <Header loggedIn={isLoggedIn}/>
+            <Header loggedIn={isLoggedIn} />
             <Main />
             <Footer />
           </Route>
@@ -203,7 +203,7 @@ function App() {
             <Login onLogin={handleLogin} />
           </Route>
           <ProtectedRoute exact path="/movies" loggedIn={isLoggedIn}>
-            <Header loggedIn={isLoggedIn}/>
+            <Header loggedIn={isLoggedIn} isThemeWhite={true}/>
             <Movies
               moviesList={moviesList}
               setMoviesList={setMoviesList}
@@ -226,7 +226,7 @@ function App() {
             <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path="/saved-movies" loggedIn={isLoggedIn}>
-            <Header loggedIn={isLoggedIn}/>
+            <Header loggedIn={isLoggedIn} isThemeWhite={true}/>
             <SavedMovies
               savedMovies={savedMovies}
               setSavedMovies={setSavedMovies}
@@ -246,7 +246,7 @@ function App() {
             <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile" loggedIn={isLoggedIn} >
-            <Header loggedIn={isLoggedIn}/>
+            <Header loggedIn={isLoggedIn} isThemeWhite={true}/>
             <Profile onLogOut={handleLogOut} onUpdateUser={handleUpdateUser}/>
           </ProtectedRoute>
           <ProtectedRoute exact path='*' loggedIn={isLoggedIn}>
