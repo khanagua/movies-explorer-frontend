@@ -44,8 +44,16 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      if (location.pathname === ('/signin' || '/signup')) {
+        history.push('/movies');
+      }
+    }
+  }, [location.pathname, isLoggedIn, history])
+
   function handleTokenCheck () {
-    if(localStorage.getItem('isLogin')) {
+    if(localStorage.getItem("isLogin")) {
       setIsLoggedIn(true);
     }
   };
@@ -62,11 +70,6 @@ function App() {
     .then(([userData, moviesData]) => {
       // данные про пользователя
       setCurrentUser(userData);
-      if (location.pathname === ('/signin' || '/signup')) {
-        history.push('/movies');
-      } else {
-        history.push(location.pathname);
-      }
       // данные про сохранненые фильмы
       let moviesDataList = moviesData.filter((movie) => movie.owner === userData._id)
       setSavedMovies(moviesDataList);
@@ -107,7 +110,7 @@ function App() {
     .then((res) => {
       if(res === 200) {
         setIsLoggedIn(true);
-        localStorage.setItem('isLogin', true);
+        localStorage.setItem("isLogin", true);
         setIsPopupOpen(false);
         history.push('/movies');
       } else {

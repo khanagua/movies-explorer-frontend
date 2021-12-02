@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '../Form/Form';
 import './Register.css';
 import useFormValidation from "../../utils/useFormValidation";
+import { Link } from 'react-router-dom';
 
 function Register(props) {
 
@@ -66,7 +67,7 @@ function Register(props) {
         />
         <span className="form__error">{errors.password || ' '}</span>
       </Form>
-      <p className="register__footer">Уже зарегистрированы? <a href="/signin" className="register__link">Войти</a></p>
+      <p className="register__footer">Уже зарегистрированы? <Link to="/signin" className="register__link">Войти</Link></p>
     </div>
   );
 }

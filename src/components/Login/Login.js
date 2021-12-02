@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Form from '../Form/Form';
 import './Login.css';
 import useFormValidation from "../../utils/useFormValidation";
+import { Link } from 'react-router-dom';
 
 import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
 
@@ -57,7 +58,7 @@ function Login(props) {
         />
         <span className="form__error">{errors.password || ' '}</span>
       </Form>
-      <p className="login__footer">Ещё не зарегистрированы? <a href="/signup" className="login__link">Регистрация</a></p>
+      <p className="login__footer">Ещё не зарегистрированы? <Link to="/signup" className="login__link">Регистрация</Link></p>
     </div>
   );
 }

@@ -12,8 +12,8 @@ function Header() {
         <div className="header__wrapper">
           <Link to="/" className="header__logo" target="_self"></Link>
           <div className="header__nav header__nav_main">
-            <a href="/signup" className="header__link">Регистрация</a>
-            <a href="/signin" className="header__link header__link_type_signin">Войти</a>
+            <Link to="/signup" className="header__link">Регистрация</Link>
+            <Link to="/signin" className="header__link header__link_type_signin">Войти</Link>
           </div>
         </div>
       </header>
@@ -23,8 +23,8 @@ function Header() {
         <div className="header__wrapper">
           <Link to="/" className="header__logo" target="_self"></Link>
           <div className="header__nav header__nav_hidden">
-            <a href="/movies" className="header__link header__link_bigger">Фильмы</a>
-            <a href="/saved-movies" className="header__link header__link_bigger" >Сохраненные фильмы</a>
+            <Link to="/movies" className="header__link header__link_bigger">Фильмы</Link>
+            <Link to="/saved-movies" className="header__link header__link_bigger" >Сохраненные фильмы</Link>
             <AccountButton />
           </div>
           <Route exact path="/movies">
