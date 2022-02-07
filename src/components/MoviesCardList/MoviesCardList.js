@@ -1,10 +1,9 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import { useEffect, useState } from 'react';
+import { DEVISE_WIDTH, AMOUNT_CARDS } from '../../utils/constants.js';
 
 function MoviesCardList(props) {
-
-  // const [isMoreButtonVisibility, setIsMoreButtonVisibility] = useState(true);
 
   const [renderedMovies, setRenderedMovies] = useState(0);
   const [moviesRenderMore, setMoviesRenderMore] = useState(0);
@@ -27,20 +26,20 @@ function MoviesCardList(props) {
 
   useEffect(() => {
     if (props.location.pathname === "/movies") {
-      if (windowWidth <= 768) {
-        setRenderedMovies(5);
-        setMoviesRenderMore(5);
+      if (windowWidth <= DEVISE_WIDTH) {
+        setRenderedMovies(AMOUNT_CARDS.five);
+        setMoviesRenderMore(AMOUNT_CARDS.five);
       } else {
-        setRenderedMovies(7);
-        setMoviesRenderMore(7);
+        setRenderedMovies(AMOUNT_CARDS.seven);
+        setMoviesRenderMore(AMOUNT_CARDS.seven);
       }
     } else {
-      if (windowWidth <= 768) {
-        setRenderedMovies(3);
-        setMoviesRenderMore(3);
+      if (windowWidth <= DEVISE_WIDTH) {
+        setRenderedMovies(AMOUNT_CARDS.three);
+        setMoviesRenderMore(AMOUNT_CARDS.three);
       } else {
-        setRenderedMovies(2);
-        setMoviesRenderMore(2);
+        setRenderedMovies(AMOUNT_CARDS.two);
+        setMoviesRenderMore(AMOUNT_CARDS.two);
       }
     }
   }, [windowWidth, props.location, props.resultMoviesList.length]);

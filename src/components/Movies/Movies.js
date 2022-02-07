@@ -18,6 +18,7 @@ function Movies(props) {
         errFindMessage={props.errFindMessage}
         setErrFindMessage={props.setErrFindMessage}
         isSavedMoviesList={props.isSavedMoviesList}
+        savedMovies={props.savedMovies}
       />
       {props.errFindMessage? <span className="movies__error">{props.errFindMessage}</span> : ''}
       {props.isResponseWaiting && <Preloader />}

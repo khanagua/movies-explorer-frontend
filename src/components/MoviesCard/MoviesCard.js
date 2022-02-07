@@ -19,7 +19,6 @@ function MoviesCard(props) {
 
     if (props.location === "/movies") {        
       deleteMovieId = props.savedMovies.find(movie => movie.movieId === props.movie.id)._id;
-      console.log(deleteMovieId)
     } else {
       deleteMovieId = props.movie._id;
     }

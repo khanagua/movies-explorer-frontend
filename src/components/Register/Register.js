@@ -50,6 +50,7 @@ function Register(props) {
           name="email"
           id="email"
           className="form__input"
+          pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
           required
           value={userData.email || ""}
           onChange = {handleChange}

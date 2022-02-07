@@ -14,39 +14,41 @@ function SearchForm(props) {
   let intermediateResult = [];
 
   const handleSubmit = (evt) => {
-    props.setIsResponseWaiting(true)
+    props.setIsResponseWaiting(true);
     evt.preventDefault();
     
-    if (isValid) {
-      props.setErrFormMessage("");
-        // смотрим, по какому списку ищем
-        if(!props.isSavedMoviesList) {
-        // ищем по всем фильмам
-          // ищет раннее загруженный список в localStorage
-          if (localStorage.getItem("moviesList")) {
-            intermediateResult = JSON.parse(localStorage.getItem("moviesList"));
-            sortMovies(intermediateResult, values.movie, values.short, props.setMoviesList, props.setErrFindMessage);
+    setTimeout(() => {
+      if (isValid) {
+        props.setErrFormMessage("");
+          // смотрим, по какому списку ищем
+          if(!props.isSavedMoviesList) {
+          // ищем по всем фильмам
+            // ищет раннее загруженный список в localStorage
+            if (localStorage.getItem("moviesList")) {
+              intermediateResult = JSON.parse(localStorage.getItem("moviesList"));
+              sortMovies(intermediateResult, values.movie, values.short, props.setMoviesList, props.setErrFindMessage)
+            } else {
+              // подтягивает список фильмов из api
+              MoviesApi.getMovies()
+              .then((moviesData) => {
+                intermediateResult = moviesData;
+                localStorage.setItem("moviesList", JSON.stringify(moviesData));
+                sortMovies(intermediateResult, values.movie, values.short, props.setMoviesList, props.setErrFindMessage);
+              })
+              .catch((err) => {
+                props.setErrFindMessage(MESSAGE.requestError);
+              })
+            }
           } else {
-            // подтягивает список фильмов из api
-            MoviesApi.getMovies()
-            .then((moviesData) => {
-              intermediateResult = moviesData;
-              localStorage.setItem("moviesList", JSON.stringify(moviesData));
-              sortMovies(intermediateResult, values.movie, values.short, props.setMoviesList, props.setErrFindMessage);
-            })
-            .catch((err) => {
-              props.setErrFindMessage(MESSAGE.requestError);
-            })
+          // ищем по сохраненкам
+            intermediateResult = props.savedMovies;
+            sortMovies(intermediateResult, values.movie, values.short, props.setSavedMovies, props.setErrFindMessage);
           }
-        } else {
-        // ищем по сохраненкам
-          intermediateResult = JSON.parse(localStorage.getItem("savedMovieList"));;
-          sortMovies(intermediateResult, values.movie, values.short, props.setSavedMovies, props.setErrFindMessage);
-        }
-    } else {
-      props.setErrFormMessage(MESSAGE.keyword);
-    }
-    props.setIsResponseWaiting(false)
+      } else {
+        props.setErrFormMessage(MESSAGE.keyword);
+      }
+      props.setIsResponseWaiting(false);
+    }, 600);
   };
 
   return (

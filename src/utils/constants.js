@@ -10,5 +10,17 @@ export const MESSAGE = {
   incorrectEmail: "Пользователь с email не найден. Ошибка ",
   incorrectData: "Ошибка в почте или пароле. Ошибка ",
   error: "Ошибка ",
-  failedUpdateData: "Не удалось обновить данные "
+  failedUpdateData: "Не удалось обновить данные ",
+  successfulUpdateData: "Данные обновлены"
 };
+
+export const DEVISE_WIDTH = 768;
+
+export const AMOUNT_CARDS = {
+  two: 2,
+  three: 3,
+  five: 5,
+  seven: 7
+};
+
+export const DURATION_SHORT_MOVIE = 40;

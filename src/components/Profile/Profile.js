@@ -7,8 +7,8 @@ function Profile(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values: userData, errors, handleChange, isValid, setIsValid, resetForm } = useFormValidation(
     {
-      name: "",
-      email: "",
+      name: currentUser.name,
+      email: currentUser.email,
     }
   );
 
@@ -42,9 +42,8 @@ function Profile(props) {
             className="profile__input"
             minLength="2"
             maxLength="50"
-            placeholder={currentUser.name}
             required
-            value={userData.name || ""}
+            value={userData.name}
             onChange = {handleChange}
           />
         </div>
@@ -55,9 +54,9 @@ function Profile(props) {
             name="email"
             id="email"
             className="profile__input"
-            placeholder={currentUser.email}
+            pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
             required
-            value={userData.email || ""}
+            value={userData.email}
             onChange = {handleChange}
           />
         </div>

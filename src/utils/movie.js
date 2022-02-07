@@ -1,5 +1,5 @@
 import * as MainApi from './MainApi.js';
-import { MESSAGE } from '../utils/constants.js';
+import { MESSAGE, DURATION_SHORT_MOVIE } from '../utils/constants.js';
 
 // возвращает фильмы, которые содержат ключевое слово в названии
 export const filterByKeyword = (moviesList, keyWord) => {
@@ -9,7 +9,7 @@ export const filterByKeyword = (moviesList, keyWord) => {
 
 // возвращает короткие фильмы
 export const filterByDuration = (movies) => {
-  let results = movies.filter((movie) => movie.duration <= 40);
+  let results = movies.filter((movie) => movie.duration <= DURATION_SHORT_MOVIE);
   return results;
 };
 

@@ -25,7 +25,7 @@ function App() {
   const location = useLocation();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [errMessage, setErrMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
 
   const [moviesList, setMoviesList] = useState([]);
@@ -61,6 +61,8 @@ function App() {
   useEffect(() => {
     location.pathname === "/movies" ? setIsSavedMoviesList(false) : setIsSavedMoviesList(true);
   }, [location.pathname]);
+  
+  // useEffect(() => {}, [savedMovies]);
 
 ////  ЗАГРУЗКА ДАННЫХ /////////////////////////////////////////////
 
@@ -140,6 +142,8 @@ function App() {
     MainApi.changeInfo({name, email})
     .then(newUserData => {
       setCurrentUser(newUserData);
+      setIsPopupOpen(true);
+      setErrMessage(`${MESSAGE.successfulUpdateData}`);
     })
     .catch(err => {
       setIsPopupOpen(true);
@@ -249,9 +253,9 @@ function App() {
             <Header loggedIn={isLoggedIn} isThemeWhite={true}/>
             <Profile onLogOut={handleLogOut} onUpdateUser={handleUpdateUser}/>
           </ProtectedRoute>
-          <ProtectedRoute exact path='*' loggedIn={isLoggedIn}>
+          <Route path='*'>
             <PageNotFound/>
-          </ProtectedRoute>
+          </Route>
         </Switch>
         <Popup
           isOpen={isPopupOpen}
