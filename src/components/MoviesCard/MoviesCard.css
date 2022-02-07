@@ -4,6 +4,13 @@
   justify-content: space-between;
   padding: 6px;
   margin-bottom: 40px;
+  text-decoration: none;
+  color: #000;
+}
+
+.movies-card:hover{
+  color: #F3C1F8;
+  opacity: 0.8;
 }
 
 .movies-card:last-of-type {

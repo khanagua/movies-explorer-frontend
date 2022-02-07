@@ -1,5 +1,6 @@
 import './Navigation.css';
 import AccountButton from '../AccountButton/AccountButton.js';
+import { Link } from 'react-router-dom';
 
 function Navigation(props) {
   return (
@@ -9,13 +10,13 @@ function Navigation(props) {
       <div className="navigation__shade"></div>
       <ul className="navigation__list" id="navigation__list_visible">
         <li className="navigation__item">
-          <a href="/" className="navigation__link">Главная</a>
+          <Link to="/" className={`navigation__link ${props.href === "/" ? "navigation__link_active" : ""}`}>Главная</Link>
         </li>
         <li className="navigation__item">
-          <a href="/movies" className={`navigation__link ${props.href === "movies" ? "navigation__link_active" : ""}`}>Фильмы</a>
+          <Link to="/movies" className={`navigation__link ${props.href === "movies" ? "navigation__link_active" : ""}`}>Фильмы</Link>
         </li>
         <li className="navigation__item">
-          <a href="/saved-movies" className={`navigation__link ${props.href === "saved-movies" ? "navigation__link_active" : ""}`}>Сохранённые фильмы</a>
+          <Link to="/saved-movies" className={`navigation__link ${props.href === "saved-movies" ? "navigation__link_active" : ""}`}>Сохранённые фильмы</Link>
         </li>
         <li className="navigation__item navigation__item__buttom"><AccountButton /></li>
       </ul>

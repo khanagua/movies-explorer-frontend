@@ -2,16 +2,30 @@
   max-width: 1140px;
   margin: 0 auto;
   padding: 0 70px;
+  margin-bottom: 80px;
+}
+
+.movies__error {
+  display: block;
+  padding-top: 20px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #FF4062;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
   .movies {
     padding: 0 30px;
+    margin-bottom: 70px;
   }
 }
 
 @media (max-width: 540px) {
   .movies {
     padding: 0 10px;
+    margin-bottom: 50px;
   }
 }
